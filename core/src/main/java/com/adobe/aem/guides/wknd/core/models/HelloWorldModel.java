@@ -19,12 +19,9 @@ import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_T
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.engine.SlingSettingsService;
 import org.apache.sling.models.annotations.Default;
-import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
@@ -33,31 +30,20 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
-import com.drew.lang.StringUtil;
 
 import java.util.Optional;
 
-@Model(adaptables = Resource.class,
-    defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+@Model(adaptables = Resource.class)
 public class HelloWorldModel {
 
-    @ValueMapValue(name = PROPERTY_RESOURCE_TYPE, injectionStrategy = InjectionStrategy.OPTIONAL)
-    @Default(values = "No resourceType")
+    @ValueMapValue(name=PROPERTY_RESOURCE_TYPE, injectionStrategy=InjectionStrategy.OPTIONAL)
+    @Default(values="No resourceType")
     protected String resourceType;
-
-    // @OSGiService
-    // private SlingSettingsService settings;
 
     @SlingObject
     private Resource currentResource;
     @SlingObject
     private ResourceResolver resourceResolver;
-
-    @ValueMapValue
-    private String title;
-
-    @ValueMapValue
-    private String text;
 
     private String message;
 
@@ -69,19 +55,12 @@ public class HelloWorldModel {
                 .map(Page::getPath).orElse("");
 
         message = "Hello World!\n"
-                + "Resource type is: " + resourceType + "\n"
-                + "Current page is:  " + currentPagePath + "\n";
+            + "Resource type is: " + resourceType + "\n"
+            + "Current page is:  " + currentPagePath + "\n";
     }
 
     public String getMessage() {
         return message;
     }
 
-    public String getTitle() {
-        return StringUtils.isNotBlank(title) ? title : "Default Title";
-    }
-
-    public String getText() {
-        return StringUtils.isNotBlank(text) ? text.toUpperCase() : null;
-    }
 }
