@@ -26,7 +26,6 @@ public class CountdownModel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         endDate = new Date();
         formattedEndDate = sdf.format(endDate);
-        LOG.info("Formatted End Date: {}", formattedEndDate);
 
     }
 
