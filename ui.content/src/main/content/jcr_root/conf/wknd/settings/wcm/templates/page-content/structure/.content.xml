@@ -3,6 +3,8 @@
     jcr:primaryType="cq:Page">
     <jcr:content
         cq:deviceGroups="[mobile/groups/responsive]"
+        cq:lastModified="{Date}2025-01-06T12:00:37.669+08:00"
+        cq:lastModifiedBy="admin"
         cq:template="/conf/wknd/settings/wcm/templates/page-content"
         jcr:primaryType="cq:PageContent"
         sling:resourceType="wknd/components/page">
