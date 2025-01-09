@@ -14,8 +14,6 @@ import org.apache.sling.models.factory.ModelFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-
 import com.adobe.cq.wcm.core.components.models.Image;
 import com.adobe.aem.guides.wknd.core.models.Byline;
 import com.google.common.collect.ImmutableList;
