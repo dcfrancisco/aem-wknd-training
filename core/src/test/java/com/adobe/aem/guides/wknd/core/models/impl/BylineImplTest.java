@@ -1,13 +1,20 @@
 package com.adobe.aem.guides.wknd.core.models.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.factory.ModelFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
+import com.adobe.cq.wcm.core.components.models.Image;
 import com.adobe.aem.guides.wknd.core.models.Byline;
 import com.google.common.collect.ImmutableList;
 
@@ -18,6 +25,7 @@ import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 class BylineImplTest {
 
     private final AemContext ctx = new AemContext();
+
 
     @BeforeEach
     void setUp() throws Exception {
@@ -57,6 +65,50 @@ class BylineImplTest {
     @Test
     public void testIsEmpty() {
         ctx.currentResource("/content/empty");
+        Byline byline = ctx.request().adaptTo(Byline.class);
+
+        assertTrue(byline.isEmpty());
+    }
+
+    @Test
+    public void testIsEmpty_WithoutName() {
+        ctx.currentResource("/content/without-name");
+
+        Byline byline = ctx.request().adaptTo(Byline.class);
+
+        assertTrue(byline.isEmpty());
+    }
+
+    @Test
+    public void testIsEmpty_WithoutOccupations() {
+        ctx.currentResource("/content/without-occupations");
+
+        Byline byline = ctx.request().adaptTo(Byline.class);
+
+        assertTrue(byline.isEmpty());
+    }
+
+    @Test
+    public void testIsEmpty_WithoutImage() {
+        ctx.currentResource("/content/byline");
+
+        ModelFactory modelFactory = mock(ModelFactory.class);
+        lenient().when(modelFactory.getModelFromWrappedRequest(eq(ctx.request()),
+                any(Resource.class),
+                eq(Image.class))).thenReturn(null);
+
+        Byline byline = ctx.request().adaptTo(Byline.class);
+
+        assertTrue(byline.isEmpty());
+    }
+
+    @Test
+    public void testIsEmpty_WithoutImageSrc() {
+        ctx.currentResource("/content/byline");
+        Image image = mock(Image.class);
+
+        when(image.getSrc()).thenReturn("");
+
         Byline byline = ctx.request().adaptTo(Byline.class);
 
         assertTrue(byline.isEmpty());
