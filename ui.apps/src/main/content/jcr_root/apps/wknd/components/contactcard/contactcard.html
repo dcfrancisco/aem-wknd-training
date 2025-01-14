@@ -2,19 +2,29 @@
   <sly data-sly-call="${templates.placeholder @ isEmpty = !text, classAppend='cmp-text'}"></sly>
 </sly>
 
-<sly  data-sly-use.contactObj="com.adobe.aem.guides.wknd.core.models.ContactCardModel">
+<sly data-sly-use.contactObj="com.adobe.aem.guides.wknd.core.models.ContactCardModel">
 
-<div class="g-row">
-  <sly data-sly-list.item= "${contactObj.contact}">
-      <div class="g-col  g-palm-wide-and-up--1-2 g-desk--1-4  print-hidden">
-          <div class="info-box  ">
-              <div class="info-box__body">
-                  <sly data-sly-test="${item.contactName}">Name - ${item.contactName @ context='html'}<br></sly>
-              <sly data-sly-test="${item.contactEmail}">Email - <a href="mailto:${item.contactEmail @ context='html'}" x-cq-linkchecker="valid">${item.contactEmail @ context='html'}</a></sly>
-              </div>
-          </div>
+<div class="cmp-contact-card">
+  <sly data-sly-list.item="${contactObj.contact}">
+    <div class="cmp-contact-card__item">
+      <div class="info-box">
+        <div class="info-box__body">
+          <sly data-sly-test="${item.contactName}">
+            <h3 class="info-box__title">${item.contactName @ context='html'}</h3>
+          </sly>
+          <sly data-sly-test="${item.contactEmail}">
+            <p class="info-box__email">
+              Email: <a href="mailto:${item.contactEmail @ context='html'}" class="info-box__link" x-cq-linkchecker="valid">
+                ${item.contactEmail @ context='html'}
+              </a>
+            </p>
+          </sly>
+        </div>
       </div>
+    </div>
   </sly>
 </div>
-  
+
+<!-- 
+<cq:includeClientLib categories="wknd.contactCard" /> -->
 </sly>
