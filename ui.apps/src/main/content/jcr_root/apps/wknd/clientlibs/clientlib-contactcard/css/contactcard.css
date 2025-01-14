@@ -1,84 +1,57 @@
 /* Container for the contact card component */
 .cmp-contact-card {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px; /* Creates space between cards */
-    justify-content: center; /* Centers cards horizontally */
+    flex-direction: column; 
+    gap: 15px; 
     padding: 20px;
-    background-color: #f5f5f5; /* Subtle background for the card section */
-    font-family: 'Arial', sans-serif; /* Default font for the component */
-    font-size: 16px; /* Base font size */
-    line-height: 1.5; /* Improve readability */
+    background-color: #f5f5f5; 
+    font-family: 'Arial', sans-serif; 
+    font-size: 16px; 
+    line-height: 1.5; 
+    box-sizing: border-box; 
 }
 
 /* Individual card styling */
 .cmp-contact-card__item {
-    flex: 1 1 calc(25% - 30px); /* Responsive layout: 4 cards per row */
-    max-width: calc(25% - 30px);
+    width: 100%; 
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    box-sizing: border-box; }
 
-/* Hover effect for cards */
+/* Hover effect for individual cards */
 .cmp-contact-card__item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Content styling within cards */
-.info-box {
-    padding: 20px;
+/* Styling for the card content */
+.cmp-contact-card__item .info-box__body {
     text-align: center;
 }
 
-/* Title (contact name) styling */
-.info-box__title {
+.cmp-contact-card__item .info-box__body h3 {
     font-size: 1.5em;
-    font-weight: bold;
     margin-bottom: 10px;
     color: #333;
-    font-family: 'Roboto', sans-serif; /* Modern font for titles */
-    text-transform: capitalize; /* Ensure consistent capitalization */
 }
 
-/* Email styling */
-.info-box__email {
+.cmp-contact-card__item .info-box__body p {
     font-size: 1em;
-    margin: 10px 0;
+    margin-bottom: 5px;
     color: #666;
-    font-family: 'Arial', sans-serif; /* Classic font for email text */
 }
 
-/* Email link styling */
-.info-box__link {
+.cmp-contact-card__item .info-box__body a {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s ease;
-    font-weight: 600; /* Slightly bold for emphasis */
 }
 
-.info-box__link:hover,
-.info-box__link:focus {
+.cmp-contact-card__item .info-box__body a:hover {
     color: #0056b3;
-    text-decoration: underline;
-    outline: none; /* Remove default focus outline */
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .cmp-contact-card__item {
-        flex: 1 1 calc(50% - 20px); /* 2 cards per row on tablets */
-        max-width: calc(50% - 20px);
-    }
-}
-
-@media (max-width: 480px) {
-    .cmp-contact-card__item {
-        flex: 1 1 100%; /* Full width on small screens */
-        max-width: 100%;
-    }
 }
